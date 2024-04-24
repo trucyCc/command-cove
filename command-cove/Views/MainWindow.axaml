@@ -60,38 +60,29 @@ WindowStartupLocation
                         BorderBrush="Gray"
                         BorderThickness="2"
                         Margin="3">
-                    <!-- Content for the left panel -->
-                    <ListBox Background="Transparent">
-                        <ListBoxItem Content="Item 1" />
-                        <ListBoxItem Content="Item 2" />
-                    </ListBox>
+
+                    <!-- 创建一个 TreeView 控件，将其项绑定到 ViewModel 中的 TreeItems 集合 -->
+                    <TreeView ItemsSource="{Binding Categories}"
+                              SelectedItem="{Binding SelectedNode}"
+                              SelectionChanged="TreeView_SelectedItemChanged">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
                 </Border>
 
-                <!-- Grid Splitter -->
-                <!-- <GridSplitter Grid.Column="1" Width="5" Background="DarkGray" -->
-                <!--               VerticalAlignment="Stretch" -->
-                <!--               HorizontalAlignment="Center" /> -->
-
-                <!-- Grid Splitter -->
-                <!-- <GridSplitter Grid.Column="1" -->
-                <!--               Width="3" -->
-                <!--               Background="DarkGray" -->
-                <!--               VerticalAlignment="Stretch" -->
-                <!--               HorizontalAlignment="Center" -->
-                <!--               IsVisible="True" -->
-                <!--               Margin="-10,0,-10,0" /> -->
-                <!-- Background="{Binding GridSplitterBackGround}" -->
-                <!-- Background="Red" -->
+                <!-- 分割线 -->
                 <GridSplitter Grid.Column="1"
                               Width="1"
                               Background="Transparent"
                               CornerRadius="10"
                               VerticalAlignment="Stretch"
                               HorizontalAlignment="Center"
-                              Margin="0 150" 
+                              Margin="0 150"
                               PointerEntered="Splitter_PointerEntered"
-                              PointerExited="Splitter_PointerExited"
-                             />
+                              PointerExited="Splitter_PointerExited" />
 
                 <!-- Right Panel -->
                 <Border Grid.Column="2"
