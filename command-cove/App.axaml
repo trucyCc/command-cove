@@ -2,13 +2,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="command_cove.App"
              xmlns:local="using:command_cove"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             RequestedThemeVariant="Default"
+             xmlns:converters="using:command_cove.Views.converter">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
-  
+
+    <Application.Resources>
+        <converters:CategoryTypeVisibilityConverter x:Key="CategoryTypeVisibilityConverter" />
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>

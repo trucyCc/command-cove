@@ -14,18 +14,24 @@ namespace command_cove.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     public ObservableCollection<Category> Categories { get; set; }
-    public Category SelectedNode { get; }
+
+    private Category _selectedNode;
+
+    public Category SelectedNode
+    {
+        get => _selectedNode;
+        set => this.RaiseAndSetIfChanged(ref _selectedNode, value);
+    }
 
     public MainWindowViewModel()
     {
-        SelectedNode = new Category();
-        
+        _selectedNode = new Category();
+
         // 假设这里有一个从数据库或其他数据源获取的原始数据列表
         List<Category> rawData = GetRawDataFromDatabaseOrOtherSource();
 
         // 构建树形结构
         Categories = BuildTree(rawData);
-        
     }
 
     private ObservableCollection<Category> BuildTree(List<Category> rawData)

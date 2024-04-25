@@ -68,9 +68,14 @@ WindowStartupLocation
                               SelectionChanged="TreeView_SelectedItemChanged">
                         <TreeView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="新增子级别" />
-                                <MenuItem Header="新增指令集" />
-                                <Separator />
+                                <MenuItem Header="新增子级别"
+                                          IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
+                                <MenuItem Header="新增指令集"
+                                          IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
+                                <MenuItem Header="新增Gist"
+                                          IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
+                                <Separator
+                                    IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
                                 <MenuItem Header="重命名" />
                                 <MenuItem Background="Brown" Header="删除" />
                             </ContextMenu>

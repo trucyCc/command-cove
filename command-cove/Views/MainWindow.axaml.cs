@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -47,5 +48,5 @@ public partial class MainWindow : Window
         // 当 selectedCategory 不为 null 且 Type 属性等于 1 时执行
         selectedCategory.Name = $"{selectedCategory.Name}_{ selectedCategory.Type}";
     }
-
+    
 }
