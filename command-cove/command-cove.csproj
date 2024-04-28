@@ -21,4 +21,13 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.10"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Views\component\"/>
+        <Folder Include="Views\folder\"/>
+        <Folder Include="Views\panel\command\"/>
+        <Folder Include="Views\panel\gist\"/>
+        <Folder Include="Views\panel\remark\"/>
+        <Folder Include="Views\panel\todo\"/>
+    </ItemGroup>
 </Project>

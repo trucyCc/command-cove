@@ -11,7 +11,7 @@
     </Application.DataTemplates>
 
     <Application.Resources>
-        <converters:CategoryTypeVisibilityConverter x:Key="CategoryTypeVisibilityConverter" />
+        <converters:FolderMenuTypeConverter x:Key="CategoryTypeVisibilityConverter" />
     </Application.Resources>
 
     <Application.Styles>
