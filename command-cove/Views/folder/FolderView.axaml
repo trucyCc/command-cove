@@ -18,68 +18,60 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
 
-        <!-- 添加滚动 -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <!-- 文件夹列表 -->
-            <ItemsControl Background="Transparent" ItemsSource="{Binding FolderGroups}">
-                <!-- 文件树 -->
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TreeView ItemsSource="{Binding }"
-                                  SelectedItem="{Binding SelectedNode, RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}"
-                                  SelectionMode="Single"
-                                  SelectionChanged="TreeView_SelectedItemChanged">
-                            <!-- 文件夹项 右键菜单项 -->
-                            <TreeView.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="新增同级节点"
-                                              IsVisible="{Binding SelectedNode.Type,
+        <!-- 文件树 -->
+        <TreeView ItemsSource="{Binding Folders }"
+                  SelectedItem="{Binding SelectedNode}"
+                  SelectionMode="Single"
+                  SelectionChanged="TreeView_SelectedItemChanged">
+            <!-- 文件夹项 右键菜单项 -->
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="新增同级节点"
+                              IsVisible="{Binding SelectedNode.Type,
                                           Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                           RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="新增子级别"
-                                              IsVisible="{Binding SelectedNode.Type, 
+                    <MenuItem Header="新增子级别"
+                              IsVisible="{Binding SelectedNode.Type, 
                                           Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                           RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="新增指令集"
-                                              IsVisible="{Binding SelectedNode.Type, 
+                    <MenuItem Header="新增指令集"
+                              IsVisible="{Binding SelectedNode.Type, 
                                           Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                           RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="新增Gist"
-                                              IsVisible="{Binding SelectedNode.Type, 
+                    <MenuItem Header="新增Gist"
+                              IsVisible="{Binding SelectedNode.Type, 
                                           Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                           RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="新增Todo"
-                                              IsVisible="{Binding SelectedNode.Type, 
+                    <MenuItem Header="新增Todo"
+                              IsVisible="{Binding SelectedNode.Type, 
                                           Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                           RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="新增Remark List"
-                                              IsVisible="{Binding SelectedNode.Type, 
+                    <MenuItem Header="新增Remark List"
+                              IsVisible="{Binding SelectedNode.Type, 
                                           Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                           RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <Separator
-                                        IsVisible="{Binding SelectedNode.Type, 
+                    <Separator
+                        IsVisible="{Binding SelectedNode.Type, 
                                     Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                     RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="复制指令集（带注释）" />
-                                    <Separator
-                                        IsVisible="{Binding SelectedNode.Type, 
+                    <MenuItem Header="复制指令集（带注释）" />
+                    <Separator
+                        IsVisible="{Binding SelectedNode.Type, 
                                     Converter={StaticResource CategoryTypeVisibilityConverter}, 
                                     RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
-                                    <MenuItem Header="重命名" />
-                                    <MenuItem Background="Brown" Header="删除" />
-                                </ContextMenu>
-                            </TreeView.ContextMenu>
-                            <TreeView.ItemTemplate>
-                                <TreeDataTemplate ItemsSource="{Binding Children}">
-                                    <!-- 文件夹项 名称 -->
-                                    <TextBlock Text="{Binding Name}" />
-                                </TreeDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                    <MenuItem Header="重命名" />
+                    <MenuItem Background="Brown" Header="删除" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
+            <TreeView.ItemTemplate>
+                <TreeDataTemplate ItemsSource="{Binding Children}">
+                    <!-- 文件夹项 名称 -->
+                    <TextBlock Text="{Binding Name}" />
+                </TreeDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+
     </Panel>
 
 

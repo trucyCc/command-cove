@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="command_cove.Views.panel.command.CommandPanelView">
-    <!-- Welcome to Avalonia! -->
 
     <Panel>
         <!-- 亚克力模糊 -->
@@ -16,15 +15,54 @@
                     TintOpacity="1"
                     MaterialOpacity="0.5" />
             </ExperimentalAcrylicBorder.Material>
-
-            <ItemsControl Background="Transparent">
-                <ListBoxItem Content="Item 1" />
-                <ListBoxItem Content="Item 8" />
-                <ListBoxItem Content="Item 8" />
-                <ListBoxItem Content="Item 8" />
-                <ListBoxItem Content="Item 9" />
-                <ListBoxItem Content="Item 10" />
-            </ItemsControl>
         </ExperimentalAcrylicBorder>
+
+        <DockPanel>
+            <!-- 添加命令按钮 -->
+            <Button DockPanel.Dock="Bottom"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                Add
+            </Button>
+            <!-- 命令列表 -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl Background="Transparent">
+                    <ListBoxItem BorderBrush="White" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="0 5">注释:</TextBlock>
+                                    <TextBlock Foreground="PaleGreen" Margin="10 5" TextDecorations="Underline">12312312312321312</TextBlock>
+                                </StackPanel>
+                                <TextBlock Margin="0 5">命令:</TextBlock>
+                                <TextBox AcceptsReturn="True" Height="62" Margin="0 0 25  0"></TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <!-- <Button Content="查看" Margin="0 5" /> -->
+                                <Button Content="复制" Margin="0 5" />
+                                <Button Content="删除" Margin="0 5">
+                                    <Button.Styles>
+                                        <Style Selector="Button">
+                                            <Setter Property="Foreground" Value="DarkRed" />
+                                        </Style>
+                                        <Style Selector="Button:pointerover  ContentPresenter">
+                                            <Setter Property="Foreground" Value="Red" />
+                                        </Style>
+                                        <Style Selector="Button:pressed  ContentPresenter">
+                                            <Setter Property="Foreground" Value="Red" />
+                                        </Style>
+                                    </Button.Styles>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </ListBoxItem>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
     </Panel>
 </UserControl>

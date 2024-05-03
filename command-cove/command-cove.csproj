@@ -24,6 +24,7 @@
 
     <ItemGroup>
         <Folder Include="Views\component\"/>
+        <Folder Include="Views\panel\command\component\" />
         <Folder Include="Views\panel\gist\"/>
         <Folder Include="Views\panel\remark\"/>
         <Folder Include="Views\panel\todo\"/>

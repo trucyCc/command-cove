@@ -22,28 +22,19 @@ public class FolderViewModel : ViewModelBase
     /// 当前选中的节点
     /// </summary>
     private Folder _selectedNode;
-    
+
     public FolderViewModel()
     {
         // 初始化选中节点，默认为空
         _selectedNode = new Folder();
 
-        FolderGroups =
-            new ObservableCollection<ObservableCollection<Folder>>
-            {
-                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
-                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
-                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
-                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
-                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
-            };
+        Folders = BuildTree(GetRawDataFromDatabaseOrOtherSource());
     }
 
     /// <summary>
     /// 文件夹树
     /// </summary>
-    // public ObservableCollection<Folder> Folders { get; set; }
-    public ObservableCollection<ObservableCollection<Folder>> FolderGroups { get; set; }
+    public ObservableCollection<Folder> Folders { get; set; }
 
     /// <summary>
     /// 当前选中的节点
@@ -97,6 +88,112 @@ public class FolderViewModel : ViewModelBase
                 Id = 1, Name = "根节点", ParentId = 0, Type = 0,
                 CreationTime = DateTime.Now
             },
+            new()
+            {
+                Id = 41, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 51, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 61, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 71, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 81, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 91, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 121, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 131, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 141, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 151, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 161, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 1241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 2241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 3241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 4241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 5241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 6241, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 2741, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 2841, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+            new()
+            {
+                Id = 2941, Name = "根节点32", ParentId = 0, Type = 0,
+                CreationTime = DateTime.Now
+            },
+
             new()
             {
                 Id = 2, Name = "子节点 2", ParentId = 1, Type = 0,
