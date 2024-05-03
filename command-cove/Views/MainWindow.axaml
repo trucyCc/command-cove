@@ -14,6 +14,7 @@ WindowStartupLocation
         xmlns:vm="using:command_cove.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:folder="clr-namespace:command_cove.Views.folder"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="command_cove.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -60,44 +61,7 @@ WindowStartupLocation
                         BorderBrush="Gray"
                         BorderThickness="2"
                         Margin="3">
-
-                    <ItemsControl Background="Transparent">
-                        <!-- 创建一个 TreeView 控件，将其项绑定到 ViewModel 中的 TreeItems 集合 -->
-                        <TreeView ItemsSource="{Binding Categories}"
-                                  SelectedItem="{Binding SelectedNode}"
-                                  SelectionMode="Single"
-                                  SelectionChanged="TreeView_SelectedItemChanged">
-                            <TreeView.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="新增同级节点"
-                                              IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="新增子级别"
-                                              IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="新增指令集"
-                                              IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="新增Gist"
-                                              IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="新增Todo"
-                                              IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="新增Remark List"
-                                              IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <Separator
-                                        IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="复制指令集（带注释）" />
-                                    <Separator
-                                        IsVisible="{Binding SelectedNode.Type, Converter={StaticResource CategoryTypeVisibilityConverter}}" />
-                                    <MenuItem Header="重命名" />
-                                    <MenuItem Background="Brown" Header="删除" />
-                                </ContextMenu>
-                            </TreeView.ContextMenu>
-                            <TreeView.ItemTemplate>
-                                <TreeDataTemplate ItemsSource="{Binding Children}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </TreeDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
-                    </ItemsControl>
-
+                    <folder:FolderView />
                 </Border>
 
                 <!-- 分割线 -->

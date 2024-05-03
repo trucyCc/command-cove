@@ -20,24 +20,38 @@ public class Command(
     DateTime creationTime,
     int sort)
 {
-    // 唯一标识
+    /// <summary>
+    /// 唯一标识
+    /// </summary>
     public int Id { get; init; } = id;
 
-    // 所属命令集ID
+    /// <summary>
+    /// 所属命令集ID
+    /// </summary>
     public int CommandSetId { get; init; } = commandSetId;
 
-    // 指令 str
+    /// <summary>
+    /// 指令 str
+    /// </summary>
     public string CommandStr { get; set; } = commandStr;
 
-    // 注释
+    /// <summary>
+    /// 注释
+    /// </summary>
     public string Comment { get; set; } = comment;
 
-    // 补充备注
+    /// <summary>
+    /// 补充备注
+    /// </summary>
     public string Remark { get; set; } = remark;
 
-    // 创建时间
+    /// <summary>
+    /// 创建时间
+    /// </summary>
     public DateTime CreationTime { get; set; } = creationTime;
 
-    // 在命令集中的顺序
+    /// <summary>
+    /// 在命令集中的顺序
+    /// </summary>
     public int Sort { get; set; } = sort;
 }

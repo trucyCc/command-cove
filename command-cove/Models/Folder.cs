@@ -22,7 +22,9 @@ public class Folder(
     List<Folder>? children = null)
     : INotifyPropertyChanged
 {
-    // 名称
+    /// <summary>
+    /// 名称
+    /// </summary>
     public string Name
     {
         get => name;
@@ -37,26 +39,42 @@ public class Folder(
         }
     }
 
-    // 唯一键
+    /// <summary>
+    /// 唯一键
+    /// </summary>
     public int Id { get; init; } = id;
 
-    // 父级Id
+    /// <summary>
+    /// 父级Id
+    /// </summary>
     public int ParentId { get; init; } = parentId;
 
-    // 0 文件夹类型 1 指令集类型
-    // 如果是1点击后修改右侧Grid内容，展示指令集
-    // 如果是0点击后展开下一层
+    /// <summary>
+    /// 0 文件夹类型 1 指令集类型
+    /// 如果是1点击后修改右侧Grid内容，展示指令集
+    /// 如果是0点击后展开下一层
+    /// </summary>
     public int Type { get; set; } = type;
 
-    // 创建时间
+    /// <summary>
+    /// 创建时间
+    /// </summary>
     public DateTime CreationTime { get; set; } = creationTime;
 
-    // 子级别文件夹
+    /// <summary>
+    /// 子级别文件夹
+    /// </summary>
     public List<Folder> Children { get; set; } = children ?? new List<Folder>();
 
-    // 属性变化通知
+    /// <summary>
+    /// 属性变化通知
+    /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// 属性变化通知方法
+    /// </summary>
+    /// <param name="propertyName">属性名称</param>
     private void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
