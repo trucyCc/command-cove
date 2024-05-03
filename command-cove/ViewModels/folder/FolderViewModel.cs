@@ -22,22 +22,28 @@ public class FolderViewModel : ViewModelBase
     /// 当前选中的节点
     /// </summary>
     private Folder _selectedNode;
-
+    
     public FolderViewModel()
     {
         // 初始化选中节点，默认为空
         _selectedNode = new Folder();
 
-        // 假设这里有一个从数据库或其他数据源获取的原始数据列表
-        var rawData = GetRawDataFromDatabaseOrOtherSource();
-        // 构建树形结构
-        Folders = BuildTree(rawData);
+        FolderGroups =
+            new ObservableCollection<ObservableCollection<Folder>>
+            {
+                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
+                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
+                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
+                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
+                BuildTree(GetRawDataFromDatabaseOrOtherSource()),
+            };
     }
 
     /// <summary>
     /// 文件夹树
     /// </summary>
-    public ObservableCollection<Folder> Folders { get; set; }
+    // public ObservableCollection<Folder> Folders { get; set; }
+    public ObservableCollection<ObservableCollection<Folder>> FolderGroups { get; set; }
 
     /// <summary>
     /// 当前选中的节点

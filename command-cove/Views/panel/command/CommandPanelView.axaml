@@ -1,0 +1,30 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="command_cove.Views.panel.command.CommandPanelView">
+    <!-- Welcome to Avalonia! -->
+
+    <Panel>
+        <!-- 亚克力模糊 -->
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.5" />
+            </ExperimentalAcrylicBorder.Material>
+
+            <ItemsControl Background="Transparent">
+                <ListBoxItem Content="Item 1" />
+                <ListBoxItem Content="Item 8" />
+                <ListBoxItem Content="Item 8" />
+                <ListBoxItem Content="Item 8" />
+                <ListBoxItem Content="Item 9" />
+                <ListBoxItem Content="Item 10" />
+            </ItemsControl>
+        </ExperimentalAcrylicBorder>
+    </Panel>
+</UserControl>

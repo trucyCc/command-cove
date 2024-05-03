@@ -15,6 +15,7 @@ WindowStartupLocation
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:folder="clr-namespace:command_cove.Views.folder"
+        xmlns:command="clr-namespace:command_cove.Views.panel.command"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="command_cove.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -84,14 +85,7 @@ WindowStartupLocation
                         BorderThickness="2"
                         Margin="3">
                     <!-- Content for the left panel -->
-                    <ListBox Background="Transparent">
-                        <ListBoxItem Content="Item 1" />
-                        <ListBoxItem Content="Item 8" />
-                        <ListBoxItem Content="Item 8" />
-                        <ListBoxItem Content="Item 8" />
-                        <ListBoxItem Content="Item 9" />
-                        <ListBoxItem Content="Item 10" />
-                    </ListBox>
+                    <command:CommandPanelView/>
                 </Border>
             </Grid>
         </Panel>
