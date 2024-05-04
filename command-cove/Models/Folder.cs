@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Microsoft.EntityFrameworkCore;
-
 
 namespace command_cove.Models;
 
@@ -26,7 +22,7 @@ public class Folder : INotifyPropertyChanged
     /// </summary>
     public int Id { get; init; }
 
-    private String _name;
+    private string _name = "Default Node";
 
     /// <summary>
     /// 名称
@@ -36,12 +32,13 @@ public class Folder : INotifyPropertyChanged
         get => _name;
         set
         {
-            // 属性发生变化，通知界面重新渲染
-            if (_name != value)
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
+            // 检查属性是否有变化
+            if (_name == value)
+                return;
+
+            // 属性变化通知
+            _name = value;
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -66,7 +63,7 @@ public class Folder : INotifyPropertyChanged
     /// 子级别文件夹
     /// </summary>
     [NotMapped]
-    public List<Folder> Children { get; set; }
+    public List<Folder> Children { get; set; } = new();
 
     /// <summary>
     /// 属性变化通知
@@ -86,12 +83,12 @@ public class Folder : INotifyPropertyChanged
     {
         if (db.Folders.Any())
             return;
-        
+
         // 如果不存在，则添加默认文件夹
         var defaultFolder = new Folder
         {
             Name = "Default Folder",
-            ParentId = 0, // 假设是顶级文件夹
+            ParentId = 0, // 顶级文件夹
             Type = 0, // 文件夹类型
             CreationTime = DateTime.Now
         };
@@ -101,46 +98,3 @@ public class Folder : INotifyPropertyChanged
         db.SaveChanges();
     }
 }
-
-// using System;
-// using System.ComponentModel;
-//
-// public class Folder: INotifyPropertyChanged
-// {
-//     public int Id { get; set; }
-//     private String _name;
-//
-//     /// <summary>
-//     /// 名称
-//     /// </summary>
-//     public string Name
-//     {
-//         get => _name;
-//         set
-//         {
-//             // 属性发生变化，通知界面重新渲染
-//             if (_name != value)
-//             {
-//                 _name = value;
-//                 OnPropertyChanged(nameof(Name));
-//             }
-//         }
-//     }
-//     public int? ParentId { get; set; }
-//     public int Type { get; set; }
-//     public DateTime CreationTime { get; set; }
-//     public event PropertyChangedEventHandler? PropertyChanged;
-//
-//     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-//     {
-//         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-//     }
-//
-//     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-//     {
-//         if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-//         field = value;
-//         OnPropertyChanged(propertyName);
-//         return true;
-//     }
-// }

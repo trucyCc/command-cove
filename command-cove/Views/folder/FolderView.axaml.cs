@@ -1,10 +1,9 @@
-﻿using Avalonia;
+﻿using System;
 using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Markup.Xaml;
-using Avalonia.Media;
+using Avalonia.Interactivity;
 using command_cove.Models;
 using command_cove.ViewModels;
+using command_cove.Views.window;
 
 namespace command_cove.Views.folder;
 
@@ -46,5 +45,28 @@ public partial class FolderView : UserControl
 
         // test:当 selectedCategory 不为 null 且 Type 属性等于 1 时执行
         selectedCategory.Name = $"{selectedCategory.Name}_{selectedCategory.Type}";
+    }
+
+    /// <summary>
+    /// 打开 新增同级节点窗口
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OpenDialog_AddLevelNode(object? sender, RoutedEventArgs e)
+    {
+        var addLevelNodeWindow = new AddLevelNodeWindow();
+        addLevelNodeWindow.InputDataEntered += AddLevelNodeWindow_InputDataEntered;
+        addLevelNodeWindow.Show();
+    }
+
+    /// <summary>
+    /// 新增同级节点
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="inputData"></param>
+    private void AddLevelNodeWindow_InputDataEntered(object? sender, string inputData)
+    {
+        // 在这里处理输入框中的数据
+        Console.WriteLine("Input data entered: " + inputData);
     }
 }

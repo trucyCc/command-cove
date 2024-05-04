@@ -1,0 +1,32 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="520" d:DesignHeight="125"
+        x:Class="command_cove.Views.window.AddLevelNodeWindow"
+        WindowStartupLocation="CenterOwner"
+        Height="110"
+        Width="520"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        Title="新建文件夹节点">
+    <Panel>
+        <!-- 亚克力模糊 -->
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.5" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <TextBlock Margin="5 10">新建文件夹节点</TextBlock>
+        <StackPanel Margin="0 40 0 30">
+            <TextBox x:Name="InputTextBox" Margin="5 5 10 5"></TextBox>
+        </StackPanel>
+    </Panel>
+</Window>

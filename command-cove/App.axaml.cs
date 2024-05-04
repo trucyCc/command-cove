@@ -25,8 +25,7 @@ public class App : Application
                 DataContext = new MainWindowViewModel()
             };
         }
+
         base.OnFrameworkInitializationCompleted();
     }
-
-
 }

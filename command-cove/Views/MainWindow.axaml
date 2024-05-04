@@ -85,7 +85,7 @@ WindowStartupLocation
                         BorderThickness="2"
                         Margin="3">
                     <!-- Content for the left panel -->
-                    <command:CommandPanelView/>
+                    <command:CommandPanelView />
                 </Border>
             </Grid>
         </Panel>

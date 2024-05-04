@@ -75,7 +75,7 @@ public class FolderViewModel : ViewModelBase
             else
             {
                 // 如果当前节点有父节点，将其添加到父节点的 Children 集合中
-                if (nodeDict.ContainsKey(node.ParentId)) nodeDict[node.ParentId].Children.Add(node);
+                if (nodeDict.ContainsKey(node.ParentId)) nodeDict[node.ParentId]?.Children?.Add(node);
             }
 
         return tree;
