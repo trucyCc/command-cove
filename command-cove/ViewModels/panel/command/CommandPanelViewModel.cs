@@ -59,17 +59,20 @@ public class CommandPanelViewModel : ViewModelBase
             .Subscribe(folder =>
             {
                 SelectedNode = folder;
-                // 根据selected获取对应的数据
-                _commandSetId = SelectedNode.Id;
-                // 从数据库读取数据
-                var commands = _db.Commands.Where(command => command.CommandSetId == SelectedNode.Id).ToList();
-                // 调整命令排序
-                commands = commands.OrderBy(c => c.Sort).ToList();
-                // 刷新视图
-                Commands.Clear();
-                foreach (var command in commands)
+                if (SelectedNode != null)
                 {
-                    Commands.Add(command);
+                    // 根据selected获取对应的数据
+                    _commandSetId = SelectedNode.Id;
+                    // 从数据库读取数据
+                    var commands = _db.Commands.Where(command => command.CommandSetId == SelectedNode.Id).ToList();
+                    // 调整命令排序
+                    commands = commands.OrderBy(c => c.Sort).ToList();
+                    // 刷新视图
+                    Commands.Clear();
+                    foreach (var command in commands)
+                    {
+                        Commands.Add(command);
+                    }
                 }
             });
     }

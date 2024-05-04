@@ -32,7 +32,7 @@ public class FolderViewModel : ViewModelBase
     {
         // 检查是否有树状结构
         _db = new DatabaseManager();
-        if (_db.Folders.Any())
+        if (!_db.Folders.Any())
         {
             Folder.InitData(_db);
         }
@@ -42,6 +42,7 @@ public class FolderViewModel : ViewModelBase
         
         // 初始化选中节点，默认为空
         SelectedNode = Folders.FirstOrDefault()!;
+        MessageBus.Current.SendMessage(SelectedNode);
     }
     
     /// <summary>
@@ -106,7 +107,12 @@ public class FolderViewModel : ViewModelBase
         // 更新视图
         var folders = new List<Folder>(Folders);
         folders.Add(folder);
-        Folders = BuildTree(folders);
+        var observableCollection = BuildTree(folders);
+        Folders.Clear();
+        foreach (var folderItem in observableCollection)
+        {
+            Folders.Add(folderItem);
+        }
     }
 
     /// <summary>
@@ -131,7 +137,12 @@ public class FolderViewModel : ViewModelBase
         // 更新视图
         var folders = new List<Folder>(Folders);
         folders.Add(folder);
-        Folders = BuildTree(folders);
+        var observableCollection = BuildTree(folders);
+        Folders.Clear();
+        foreach (var folderItem in observableCollection)
+        {
+            Folders.Add(folderItem);
+        }
     }
 
     /// <summary>
@@ -156,6 +167,11 @@ public class FolderViewModel : ViewModelBase
         // 更新视图
         var folders = new List<Folder>(Folders);
         folders.Add(folder);
-        Folders = BuildTree(folders);
+        var observableCollection = BuildTree(folders);
+        Folders.Clear();
+        foreach (var folderItem in observableCollection)
+        {
+            Folders.Add(folderItem);
+        }
     }
 }
