@@ -6,6 +6,15 @@ using Avalonia.Markup.Xaml;
 
 namespace command_cove.Views.window;
 
+/*
+* 
+* RightPanel RightMenu 新增子节点
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:50:43
+* @Author: Trucy
+* @Modify:
+*/
 public partial class AddChildFolderNodeWindow : Window
 {
     

@@ -4,6 +4,15 @@ using Avalonia.Input;
 
 namespace command_cove.Views.window;
 
+/*
+* 
+* RightPanel RightMenu 新增同级别节点
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:51:50
+* @Author: Trucy
+* @Modify:
+*/
 public partial class AddLevelNodeWindow : Window
 {
     /// <summary>

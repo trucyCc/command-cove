@@ -6,9 +6,15 @@ using command_cove.ViewModels;
 
 namespace command_cove.Views;
 
-/// <summary>
-/// 主窗口视图
-/// </summary>
+/*
+ *
+ * 主窗口视图
+ *
+ * @Description:
+ * @Date: 2024年05月04日 星期六 20:52:53
+ * @Author: Trucy
+ * @Modify:
+ */
 public partial class MainWindow : Window
 {
     public MainWindow()

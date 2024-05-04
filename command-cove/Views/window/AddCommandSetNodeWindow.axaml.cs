@@ -6,6 +6,15 @@ using Avalonia.Markup.Xaml;
 
 namespace command_cove.Views.window;
 
+/*
+* 
+* RightPanel RightMenu 新增命令集
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:51:25
+* @Author: Trucy
+* @Modify:
+*/
 public partial class AddCommandSetNodeWindow : Window
 {
     

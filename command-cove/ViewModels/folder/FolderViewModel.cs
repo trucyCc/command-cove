@@ -23,6 +23,9 @@ public class FolderViewModel : ViewModelBase
     /// </summary>
     private Folder _selectedNode;
 
+    /// <summary>
+    /// 数据库连接
+    /// </summary>
     private DatabaseManager _db;
 
     public FolderViewModel()
@@ -34,14 +37,13 @@ public class FolderViewModel : ViewModelBase
             Folder.InitData(_db);
         }
         
+        // 从数据库加载数据初始化列表
         Folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
         
         // 初始化选中节点，默认为空
         SelectedNode = Folders.FirstOrDefault()!;
-        // MessageBus.Current.SendMessage(SelectedNode);
     }
-
-
+    
     /// <summary>
     /// 文件夹树
     /// </summary>

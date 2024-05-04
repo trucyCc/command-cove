@@ -4,6 +4,15 @@ using Avalonia.Data.Converters;
 
 namespace command_cove.Views.converter;
 
+/*
+* 
+* 命令类型转换bool
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:46:42
+* @Author: Trucy
+* @Modify:
+*/
 public class CommendVisibleTypeConverter : IValueConverter
 {
     /// <summary>

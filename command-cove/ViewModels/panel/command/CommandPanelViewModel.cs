@@ -8,14 +8,36 @@ using ReactiveUI;
 
 namespace command_cove.ViewModels.panel.command;
 
+/*
+* 
+* 命令板实现
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:43:45
+* @Author: Trucy
+* @Modify:
+*/
 public class CommandPanelViewModel : ViewModelBase
 {
+    /// <summary>
+    /// 数据库
+    /// </summary>
     private DatabaseManager _db;
+    
+    /// <summary>
+    /// 当前选中的 命令集ID
+    /// </summary>
     private int _commandSetId = 1;
 
-    private Folder _selectedNode;
+    /// <summary>
+    /// 当前选中节点
+    /// </summary>
+    private Folder? _selectedNode;
 
-    public Folder SelectedNode
+    /// <summary>
+    /// 当前选中节点
+    /// </summary>
+    public Folder? SelectedNode
     {
         get => _selectedNode;
         set => this.RaiseAndSetIfChanged(ref _selectedNode, value);
@@ -28,6 +50,7 @@ public class CommandPanelViewModel : ViewModelBase
 
     public CommandPanelViewModel()
     {
+        // 初始化数据
         _db = new DatabaseManager();
         Commands = new ObservableCollection<Command>();
 
@@ -38,7 +61,11 @@ public class CommandPanelViewModel : ViewModelBase
                 SelectedNode = folder;
                 // 根据selected获取对应的数据
                 _commandSetId = SelectedNode.Id;
+                // 从数据库读取数据
                 var commands = _db.Commands.Where(command => command.CommandSetId == SelectedNode.Id).ToList();
+                // 调整命令排序
+                commands = commands.OrderBy(c => c.Sort).ToList();
+                // 刷新视图
                 Commands.Clear();
                 foreach (var command in commands)
                 {
@@ -47,6 +74,10 @@ public class CommandPanelViewModel : ViewModelBase
             });
     }
 
+    /// <summary>
+    /// 添加命令
+    /// </summary>
+    /// <param name="inputData"></param>
     public void AddCommand(Command inputData)
     {
         inputData.CommandSetId = _commandSetId;

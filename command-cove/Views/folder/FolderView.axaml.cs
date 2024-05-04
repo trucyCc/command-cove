@@ -25,18 +25,24 @@ public partial class FolderView : UserControl
     {
         InitializeComponent();
         DataContext = new FolderViewModel(); // 确保FolderViewModel被实例化
-        this.AttachedToVisualTree += FolderView_AttachedToVisualTree;
+        
+        // 窗口加载完成后，触发事件
+        AttachedToVisualTree += FolderView_AttachedToVisualTree!;
     }
     
+    /// <summary>
+    /// 在窗口或控件被附加到可视树时触发
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void FolderView_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
     {
         // 发送消息到ViewModel
-        var messageBus = Locator.Current.GetService<IMessageBus>();
         if (DataContext is FolderViewModel model)
         {
+            // 获取默认Selected，发送到消息总线
             MessageBus.Current.SendMessage(model.SelectedNode);
         }
-        
     }
 
     /// <summary>
@@ -56,7 +62,7 @@ public partial class FolderView : UserControl
         // if (!(selectedFolder is {Type: 1}))
         //     return;
 
-        // todo:根据节点类型，切换右侧视图内容
+        // 触发消息总线，更新MainWindow Left Panel
         MessageBus.Current.SendMessage(selectedFolder);
     }
 

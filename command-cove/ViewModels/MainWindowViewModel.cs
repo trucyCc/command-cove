@@ -6,10 +6,25 @@ using ReactiveUI;
 
 namespace command_cove.ViewModels;
 
+/*
+* 
+* 主窗口实现
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:44:09
+* @Author: Trucy
+* @Modify:
+*/
 public class MainWindowViewModel : ViewModelBase
 {
+    /// <summary>
+    /// 当前选中节点
+    /// </summary>
     private Folder _selectedNode;
 
+    /// <summary>
+    /// 当前选中节点
+    /// </summary>
     public Folder SelectedNode
     {
         get => _selectedNode;
@@ -23,7 +38,6 @@ public class MainWindowViewModel : ViewModelBase
             .Subscribe(folder =>
             {
                 SelectedNode = folder;
-                // 在这里执行其他你想要的逻辑，比如更新 UI
             });
     }
 }

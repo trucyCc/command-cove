@@ -7,6 +7,15 @@ using command_cove.Views.window;
 
 namespace command_cove.Views.panel.command;
 
+/*
+* 
+* 命令列表Panel
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:50:15
+* @Author: Trucy
+* @Modify:
+*/
 public partial class CommandPanelView : UserControl
 {
     public CommandPanelView()

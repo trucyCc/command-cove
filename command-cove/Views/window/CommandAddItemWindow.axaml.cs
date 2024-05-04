@@ -7,6 +7,15 @@ using command_cove.Models;
 
 namespace command_cove.Views.window;
 
+/*
+* 
+* 命令Panel 新增命令Item
+*
+* @Description:
+* @Date: 2024年05月04日 星期六 20:52:02
+* @Author: Trucy
+* @Modify:
+*/
 public partial class CommandAddItemWindow : Window
 {
     /// <summary>
