@@ -57,8 +57,7 @@
                     <!-- <MenuItem Header="复制指令集（带注释）" /> -->
                     <Separator
                         IsVisible="{Binding SelectedNode.Type, 
-                                    Converter={StaticResource FolderMenuTypeConverter}, 
-                                    RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
+                                    Converter={StaticResource FolderMenuTypeConverter}}" />
                     <MenuItem Header="重命名" />
                     <MenuItem Background="Brown" Header="删除" />
                 </ContextMenu>
