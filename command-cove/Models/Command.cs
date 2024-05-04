@@ -11,47 +11,40 @@ namespace command_cove.Models;
  * @Author: Trucy
  * @Modify:
  */
-public class Command(
-    int id,
-    int commandSetId,
-    string commandStr,
-    string comment,
-    string remark,
-    DateTime creationTime,
-    int sort)
+public class Command
 {
     /// <summary>
     /// 唯一标识
     /// </summary>
-    public int Id { get; init; } = id;
+    public int Id { get; init; }
 
     /// <summary>
     /// 所属命令集ID
     /// </summary>
-    public int CommandSetId { get; init; } = commandSetId;
+    public int CommandSetId { get; init; }
 
     /// <summary>
     /// 指令 str
     /// </summary>
-    public string CommandStr { get; set; } = commandStr;
+    public string CommandStr { get; set; }
 
     /// <summary>
     /// 注释
     /// </summary>
-    public string Comment { get; set; } = comment;
+    public string Comment { get; set; }
 
     /// <summary>
     /// 补充备注
     /// </summary>
-    public string Remark { get; set; } = remark;
+    public string Remark { get; set; }
 
     /// <summary>
     /// 创建时间
     /// </summary>
-    public DateTime CreationTime { get; set; } = creationTime;
+    public DateTime CreationTime { get; set; }
 
     /// <summary>
     /// 在命令集中的顺序
     /// </summary>
-    public int Sort { get; set; } = sort;
+    public int Sort { get; set; }
 }

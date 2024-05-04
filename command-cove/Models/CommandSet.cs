@@ -11,25 +11,25 @@ namespace command_cove.Models;
  * @Author: Trucy
  * @Modify:
  */
-public class CommandSet(int id, int folderId, string name, DateTime creationTime)
+public class CommandSet
 {
     /// <summary>
     /// 唯一标识
     /// </summary>
-    public int Id { get; set; } = id;
+    public int Id { get; set; }
 
     /// <summary>
     /// 所属目录ID
     /// </summary>
-    public int FolderId { get; set; } = folderId;
+    public int FolderId { get; set; }
 
     /// <summary>
     /// 命令集名称
     /// </summary>
-    public string Name { get; set; } = name;
+    public string Name { get; set; }
 
     /// <summary>
     /// 创建时间
     /// </summary>
-    public DateTime CreationTime { get; set; } = creationTime;
+    public DateTime CreationTime { get; set; }
 }

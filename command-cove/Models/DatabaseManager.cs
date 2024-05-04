@@ -52,7 +52,7 @@ public class DatabaseManager : DbContext
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
-        // 创建表
+        // 文件夹
         var createTableCommand = connection.CreateCommand();
         createTableCommand.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Folders (
@@ -62,8 +62,30 @@ public class DatabaseManager : DbContext
                     type INTEGER,
                     creationTime  DATETIME
                 )";
-
         // 执行语句
+        createTableCommand.ExecuteNonQuery();
+
+        // 命令集
+        createTableCommand.CommandText = @"
+            CREATE TABLE IF NOT EXISTS  CommandSet (
+                id INTEGER PRIMARY KEY,
+                folderId INTEGER,
+                name TEXT,
+                creationTime DATETIME
+            )";
+        createTableCommand.ExecuteNonQuery();
+        
+        // 命令
+        createTableCommand.CommandText = @"
+                CREATE TABLE IF NOT EXISTS Command (
+                    id INTEGER PRIMARY KEY,
+                    commandSetId INTEGER,
+                    commandStr TEXT,
+                    comment TEXT,
+                    remark TEXT,
+                    creationTime DATETIME,
+                    sort INTEGER
+                )";
         createTableCommand.ExecuteNonQuery();
     }
 }
