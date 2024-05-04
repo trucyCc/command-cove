@@ -23,19 +23,21 @@ public class FolderViewModel : ViewModelBase
     /// </summary>
     private Folder _selectedNode;
 
+    private DatabaseManager _db;
+
     public FolderViewModel()
     {
         // 初始化选中节点，默认为空
         _selectedNode = new Folder();
 
         // 检查是否有树状结构
-        using var db = new DatabaseManager();
-        if (db.Folders.Any())
+        _db = new DatabaseManager();
+        if (_db.Folders.Any())
         {
-            Folder.InitData(db);
+            Folder.InitData(_db);
         }
 
-        Folders = new ObservableCollection<Folder>(BuildTree(db.Folders.ToList()));
+        Folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
     }
 
 
@@ -79,5 +81,78 @@ public class FolderViewModel : ViewModelBase
             }
 
         return tree;
+    }
+
+    /// <summary>
+    /// 新增同级节点
+    /// </summary>
+    public void AddLevelNode(string name)
+    {
+        var folder = new Folder
+        {
+            Name = name,
+            ParentId = _selectedNode.ParentId, // 同级别
+            Type = _selectedNode.Type, // 文件夹类型
+            CreationTime = DateTime.Now
+        };
+
+        // 插入到数据库
+        _db.Folders.Add(folder);
+        _db.SaveChanges();
+
+        // 更新视图
+        var folders = new List<Folder>(Folders);
+        folders.Add(folder);
+        Folders = BuildTree(folders);
+    }
+
+    /// <summary>
+    /// 新增当前子节点
+    /// </summary>
+    /// <param name="name"></param>
+    public void AddChildNode(string name)
+    {
+        // 如果不存在，则添加默认文件夹
+        var folder = new Folder
+        {
+            Name = name,
+            ParentId = _selectedNode.Id, // 同级别
+            Type = _selectedNode.Type, // 文件夹类型
+            CreationTime = DateTime.Now
+        };
+
+        // 插入到数据库
+        _db.Folders.Add(folder);
+        _db.SaveChanges();
+
+        // 更新视图
+        var folders = new List<Folder>(Folders);
+        folders.Add(folder);
+        Folders = BuildTree(folders);
+    }
+
+    /// <summary>
+    /// 新增命令集节点
+    /// </summary>
+    /// <param name="name"></param>
+    public void AddCommandSetNode(string name)
+    {
+        // 如果不存在，则添加默认文件夹
+        var folder = new Folder
+        {
+            Name = name,
+            ParentId = _selectedNode.Id, // 同级别
+            Type = 1, // 指令集类型
+            CreationTime = DateTime.Now
+        };
+
+        // 插入到数据库
+        _db.Folders.Add(folder);
+        _db.SaveChanges();
+
+        // 更新视图
+        var folders = new List<Folder>(Folders);
+        folders.Add(folder);
+        Folders = BuildTree(folders);
     }
 }

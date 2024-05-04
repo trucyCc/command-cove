@@ -18,6 +18,8 @@ namespace command_cove.Views.folder;
  */
 public partial class FolderView : UserControl
 {
+    
+    
     public FolderView()
     {
         InitializeComponent();
@@ -44,7 +46,7 @@ public partial class FolderView : UserControl
         // todo:根据节点类型，切换右侧视图内容
 
         // test:当 selectedCategory 不为 null 且 Type 属性等于 1 时执行
-        selectedCategory.Name = $"{selectedCategory.Name}_{selectedCategory.Type}";
+        // selectedCategory.Name = $"{selectedCategory.Name}_{selectedCategory.Type}";
     }
 
     /// <summary>
@@ -66,8 +68,10 @@ public partial class FolderView : UserControl
     /// <param name="inputData"></param>
     private void AddLevelNodeWindow_InputDataEntered(object? sender, string inputData)
     {
-        // 在这里处理输入框中的数据
-        Console.WriteLine("Input data entered: " + inputData);
+        if (DataContext is FolderViewModel model)
+        {
+            model.AddLevelNode(inputData);
+        }
     }
     
     /// <summary>
@@ -89,8 +93,10 @@ public partial class FolderView : UserControl
     /// <param name="inputData"></param>
     private void AddChildFolderNodeWindow_InputDataEntered(object? sender, string inputData)
     {
-        // 在这里处理输入框中的数据
-        Console.WriteLine("Input data entered: " + inputData);
+        if (DataContext is FolderViewModel model)
+        {
+            model.AddChildNode(inputData);
+        }
     }
     
     /// <summary>
@@ -112,7 +118,9 @@ public partial class FolderView : UserControl
     /// <param name="inputData"></param>
     private void AddCommandSetNodeWindow_InputDataEntered(object? sender, string inputData)
     {
-        // 在这里处理输入框中的数据
-        Console.WriteLine("Input data entered: " + inputData);
+        if (DataContext is FolderViewModel model)
+        {
+            model.AddCommandSetNode(inputData);
+        }
     }
 }
