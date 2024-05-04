@@ -69,4 +69,50 @@ public partial class FolderView : UserControl
         // 在这里处理输入框中的数据
         Console.WriteLine("Input data entered: " + inputData);
     }
+    
+    /// <summary>
+    /// 打开 新增子节点窗口
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OpenDialog_AddChildFolderNode(object? sender, RoutedEventArgs e)
+    {
+        var addChildFolderNodeWindow = new AddChildFolderNodeWindow();
+        addChildFolderNodeWindow.InputDataEntered += AddChildFolderNodeWindow_InputDataEntered;
+        addChildFolderNodeWindow.Show();
+    }
+
+    /// <summary>
+    /// 新增子节点窗口
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="inputData"></param>
+    private void AddChildFolderNodeWindow_InputDataEntered(object? sender, string inputData)
+    {
+        // 在这里处理输入框中的数据
+        Console.WriteLine("Input data entered: " + inputData);
+    }
+    
+    /// <summary>
+    /// 打开 新增子节点窗口
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OpenDialog_AddCommandSetNode(object? sender, RoutedEventArgs e)
+    {
+        var addCommandSetNodeWindow = new AddCommandSetNodeWindow();
+        addCommandSetNodeWindow.InputDataEntered += AddCommandSetNodeWindow_InputDataEntered;
+        addCommandSetNodeWindow.Show();
+    }
+
+    /// <summary>
+    /// 新增子节点窗口
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="inputData"></param>
+    private void AddCommandSetNodeWindow_InputDataEntered(object? sender, string inputData)
+    {
+        // 在这里处理输入框中的数据
+        Console.WriteLine("Input data entered: " + inputData);
+    }
 }
