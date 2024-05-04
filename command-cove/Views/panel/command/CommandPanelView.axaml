@@ -2,8 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:command="clr-namespace:command_cove.ViewModels.panel.command"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="command_cove.Views.panel.command.CommandPanelView">
+             x:Class="command_cove.Views.panel.command.CommandPanelView"
+             x:DataType="command:CommandPanelViewModel">
 
     <Panel>
         <!-- 亚克力模糊 -->
@@ -22,45 +24,56 @@
             <Button DockPanel.Dock="Bottom"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
+                    Click="OpenDialog_CommandAddItemWindow"
                     VerticalContentAlignment="Center">
                 Add
             </Button>
             <!-- 命令列表 -->
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ItemsControl Background="Transparent">
-                    <ListBoxItem BorderBrush="White" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="17*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Margin="0 5">注释:</TextBlock>
-                                    <TextBlock Foreground="PaleGreen" Margin="10 5" TextDecorations="Underline">12312312312321312</TextBlock>
-                                </StackPanel>
-                                <TextBlock Margin="0 5">命令:</TextBlock>
-                                <TextBox AcceptsReturn="True" Height="62" Margin="0 0 25  0"></TextBox>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1">
-                                <!-- <Button Content="查看" Margin="0 5" /> -->
-                                <Button Content="复制" Margin="0 5" />
-                                <Button Content="删除" Margin="0 5">
-                                    <Button.Styles>
-                                        <Style Selector="Button">
-                                            <Setter Property="Foreground" Value="DarkRed" />
-                                        </Style>
-                                        <Style Selector="Button:pointerover  ContentPresenter">
-                                            <Setter Property="Foreground" Value="Red" />
-                                        </Style>
-                                        <Style Selector="Button:pressed  ContentPresenter">
-                                            <Setter Property="Foreground" Value="Red" />
-                                        </Style>
-                                    </Button.Styles>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                    </ListBoxItem>
+                <ItemsControl Background="Transparent" ItemsSource="{Binding Commands}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ListBoxItem BorderBrush="White" BorderThickness="1" Margin="20 7">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="17*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="0 5">注释:</TextBlock>
+                                            <TextBlock Foreground="PaleGreen" 
+                                                       Margin="10 5" 
+                                                       TextDecorations="Underline"
+                                                       Text="{Binding Comment}"/>
+                                        </StackPanel>
+                                        <TextBlock Margin="0 5">命令:</TextBlock>
+                                        <TextBox AcceptsReturn="True" 
+                                                 TextWrapping="Wrap"
+                                                 Margin="0 0 25  0"
+                                                 Text="{Binding CommandStr}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <!-- <Button Content="查看" Margin="0 5" /> -->
+                                        <Button Content="复制" Margin="0 5" />
+                                        <Button Content="删除" Margin="0 5">
+                                            <Button.Styles>
+                                                <Style Selector="Button">
+                                                    <Setter Property="Foreground" Value="DarkRed" />
+                                                </Style>
+                                                <Style Selector="Button:pointerover  ContentPresenter">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </Style>
+                                                <Style Selector="Button:pressed  ContentPresenter">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </Style>
+                                            </Button.Styles>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </ListBoxItem>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
         </DockPanel>

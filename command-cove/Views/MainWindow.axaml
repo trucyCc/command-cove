@@ -84,8 +84,11 @@ WindowStartupLocation
                         BorderBrush="Gray"
                         BorderThickness="2"
                         Margin="3">
-                    <!-- Content for the left panel -->
-                    <command:CommandPanelView />
+                    <Panel
+                        IsVisible="{Binding SelectedNode.Type,
+                        Converter={StaticResource CommendVisibleTypeConverter}}">
+                        <command:CommandPanelView/>
+                    </Panel>
                 </Border>
             </Grid>
         </Panel>

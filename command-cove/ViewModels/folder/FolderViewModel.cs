@@ -21,23 +21,24 @@ public class FolderViewModel : ViewModelBase
     /// <summary>
     /// 当前选中的节点
     /// </summary>
-    private Folder _selectedNode;
+    public Folder _selectedNode;
 
     private DatabaseManager _db;
 
     public FolderViewModel()
     {
-        // 初始化选中节点，默认为空
-        _selectedNode = new Folder();
-
         // 检查是否有树状结构
         _db = new DatabaseManager();
         if (_db.Folders.Any())
         {
             Folder.InitData(_db);
         }
-
+        
         Folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
+        
+        // 初始化选中节点，默认为空
+        // SelectedNode = Folders.FirstOrDefault()!;
+        // MessageBus.Current.SendMessage(SelectedNode);
     }
 
 

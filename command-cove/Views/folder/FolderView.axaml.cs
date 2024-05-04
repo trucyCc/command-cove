@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using command_cove.Models;
 using command_cove.ViewModels;
 using command_cove.Views.window;
+using ReactiveUI;
 
 namespace command_cove.Views.folder;
 
@@ -36,15 +37,15 @@ public partial class FolderView : UserControl
         if (!(sender is TreeView treeView))
             return;
 
-        if (!(treeView.SelectedItem is Folder selectedCategory))
+        if (!(treeView.SelectedItem is Folder selectedFolder))
             return;
 
         // 文件夹项目不做操作
-        if (!(selectedCategory is {Type: 1}))
-            return;
+        // if (!(selectedFolder is {Type: 1}))
+        //     return;
 
         // todo:根据节点类型，切换右侧视图内容
-
+        MessageBus.Current.SendMessage(selectedFolder);
         // test:当 selectedCategory 不为 null 且 Type 属性等于 1 时执行
         // selectedCategory.Name = $"{selectedCategory.Name}_{selectedCategory.Type}";
     }

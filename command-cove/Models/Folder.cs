@@ -47,12 +47,27 @@ public class Folder : INotifyPropertyChanged
     /// </summary>
     public int ParentId { get; init; }
 
+    private int _type;
+
     /// <summary>
     /// 0 文件夹类型 1 指令集类型
     /// 如果是1点击后修改右侧Grid内容，展示指令集
     /// 如果是0点击后展开下一层
     /// </summary>
-    public int Type { get; set; }
+    public int Type
+    {
+        get => _type;
+        set
+        {
+            // 检查属性是否有变化
+            if (_type == value)
+                return;
+
+            // 属性变化通知
+            _type = value;
+            OnPropertyChanged(nameof(Type));
+        }
+    }
 
     /// <summary>
     /// 创建时间

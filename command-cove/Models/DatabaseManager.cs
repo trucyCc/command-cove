@@ -24,11 +24,6 @@ public class DatabaseManager : DbContext
     public DbSet<Folder> Folders { get; set; }
 
     /// <summary>
-    /// 命令集
-    /// </summary>
-    public DbSet<CommandSet> CommandSets { get; set; }
-
-    /// <summary>
     /// 命令
     /// </summary>
     public DbSet<Command> Commands { get; set; }
@@ -64,20 +59,10 @@ public class DatabaseManager : DbContext
                 )";
         // 执行语句
         createTableCommand.ExecuteNonQuery();
-
-        // 命令集
-        createTableCommand.CommandText = @"
-            CREATE TABLE IF NOT EXISTS  CommandSet (
-                id INTEGER PRIMARY KEY,
-                folderId INTEGER,
-                name TEXT,
-                creationTime DATETIME
-            )";
-        createTableCommand.ExecuteNonQuery();
         
         // 命令
         createTableCommand.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Command (
+                CREATE TABLE IF NOT EXISTS Commands (
                     id INTEGER PRIMARY KEY,
                     commandSetId INTEGER,
                     commandStr TEXT,

@@ -29,15 +29,15 @@
                     <MenuItem Header="新增同级节点"
                               Click="OpenDialog_AddLevelNode"
                               IsVisible="{Binding SelectedNode.Type,
-                                          Converter={StaticResource CategoryTypeVisibilityConverter}}" />
+                                          Converter={StaticResource FolderMenuTypeConverter}}" />
                     <MenuItem Header="新增子级别"
                               Click="OpenDialog_AddChildFolderNode"
                               IsVisible="{Binding SelectedNode.Type, 
-                                          Converter={StaticResource CategoryTypeVisibilityConverter}}" />
+                                          Converter={StaticResource FolderMenuTypeConverter}}" />
                     <MenuItem Header="新增指令集"
                               Click="OpenDialog_AddCommandSetNode"
                               IsVisible="{Binding SelectedNode.Type, 
-                                          Converter={StaticResource CategoryTypeVisibilityConverter}}" />
+                                          Converter={StaticResource FolderMenuTypeConverter}}" />
                     <!-- <MenuItem Header="新增Gist" -->
                     <!--           IsVisible="{Binding SelectedNode.Type,  -->
                     <!--                       Converter={StaticResource CategoryTypeVisibilityConverter},  -->
@@ -57,7 +57,7 @@
                     <!-- <MenuItem Header="复制指令集（带注释）" /> -->
                     <Separator
                         IsVisible="{Binding SelectedNode.Type, 
-                                    Converter={StaticResource CategoryTypeVisibilityConverter}, 
+                                    Converter={StaticResource FolderMenuTypeConverter}, 
                                     RelativeSource={RelativeSource AncestorType={x:Type viewModels:FolderViewModel}}}" />
                     <MenuItem Header="重命名" />
                     <MenuItem Background="Brown" Header="删除" />

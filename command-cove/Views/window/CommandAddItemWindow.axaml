@@ -1,0 +1,68 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="520" d:DesignHeight="200"
+        x:Class="command_cove.Views.window.CommandAddItemWindow"
+        WindowStartupLocation="CenterOwner"
+        Height="200"
+        Width="520"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1">
+    <Panel>
+        <!-- 亚克力模糊 -->
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.5" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <TextBlock Margin="5 10">新增命令</TextBlock>
+        <Grid Margin="20 40 0 30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="排序：" VerticalAlignment="Center" />
+                <NumericUpDown Grid.Column="1" 
+                               x:Name="InputSort"
+                               Margin="5 5 10 5" 
+                               TextInput="InputSort_TextInput"
+                               VerticalAlignment="Center" />
+            </Grid>
+
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="注释：" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" x:Name="InputComment" Margin="5 5 10 5" VerticalAlignment="Center" />
+            </Grid>
+
+            <Grid VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="命令：" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" x:Name="InputCommand" TextWrapping="Wrap" Margin="5 5 10 5"
+                         VerticalAlignment="Center" />
+            </Grid>
+
+        </Grid>
+        <StackPanel Margin="0 40 0 30">
+        </StackPanel>
+    </Panel>
+</Window>
