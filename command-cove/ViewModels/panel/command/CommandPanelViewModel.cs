@@ -13,7 +13,7 @@ public class CommandPanelViewModel : ViewModelBase
     private DatabaseManager _db;
     private int _commandSetId = 1;
 
-    public Folder _selectedNode;
+    private Folder _selectedNode;
 
     public Folder SelectedNode
     {
@@ -36,17 +36,14 @@ public class CommandPanelViewModel : ViewModelBase
             .Subscribe(folder =>
             {
                 SelectedNode = folder;
-                Dispatcher.UIThread.InvokeAsync(() =>
+                // 根据selected获取对应的数据
+                _commandSetId = SelectedNode.Id;
+                var commands = _db.Commands.Where(command => command.CommandSetId == SelectedNode.Id).ToList();
+                Commands.Clear();
+                foreach (var command in commands)
                 {
-                    // 根据selected获取对应的数据
-                    _commandSetId = SelectedNode.Id;
-                    var commands = _db.Commands.Where(command => command.CommandSetId == SelectedNode.Id).ToList();
-                    Commands.Clear();
-                    foreach (var command in commands)
-                    {
-                        Commands.Add(command);
-                    }
-                });
+                    Commands.Add(command);
+                }
             });
     }
 
@@ -67,6 +64,5 @@ public class CommandPanelViewModel : ViewModelBase
         {
             Commands.Add(command);
         }
-        // Dispatcher.UIThread.InvokeAsync(() => { Commands = new ObservableCollection<Command>(commands); });
     }
 }

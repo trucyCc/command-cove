@@ -21,7 +21,7 @@ public class FolderViewModel : ViewModelBase
     /// <summary>
     /// 当前选中的节点
     /// </summary>
-    public Folder _selectedNode;
+    private Folder _selectedNode;
 
     private DatabaseManager _db;
 
@@ -37,7 +37,7 @@ public class FolderViewModel : ViewModelBase
         Folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
         
         // 初始化选中节点，默认为空
-        // SelectedNode = Folders.FirstOrDefault()!;
+        SelectedNode = Folders.FirstOrDefault()!;
         // MessageBus.Current.SendMessage(SelectedNode);
     }
 
@@ -92,8 +92,8 @@ public class FolderViewModel : ViewModelBase
         var folder = new Folder
         {
             Name = name,
-            ParentId = _selectedNode.ParentId, // 同级别
-            Type = _selectedNode.Type, // 文件夹类型
+            ParentId = SelectedNode.ParentId, // 同级别
+            Type = SelectedNode.Type, // 文件夹类型
             CreationTime = DateTime.Now
         };
 
@@ -117,8 +117,8 @@ public class FolderViewModel : ViewModelBase
         var folder = new Folder
         {
             Name = name,
-            ParentId = _selectedNode.Id, // 同级别
-            Type = _selectedNode.Type, // 文件夹类型
+            ParentId = SelectedNode.Id, // 同级别
+            Type = SelectedNode.Type, // 文件夹类型
             CreationTime = DateTime.Now
         };
 
@@ -142,7 +142,7 @@ public class FolderViewModel : ViewModelBase
         var folder = new Folder
         {
             Name = name,
-            ParentId = _selectedNode.Id, // 同级别
+            ParentId = SelectedNode.Id, // 同级别
             Type = 1, // 指令集类型
             CreationTime = DateTime.Now
         };

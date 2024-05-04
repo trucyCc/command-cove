@@ -1,10 +1,12 @@
 ﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using command_cove.Models;
 using command_cove.ViewModels;
 using command_cove.Views.window;
 using ReactiveUI;
+using Splat;
 
 namespace command_cove.Views.folder;
 
@@ -19,12 +21,22 @@ namespace command_cove.Views.folder;
  */
 public partial class FolderView : UserControl
 {
-    
-    
     public FolderView()
     {
         InitializeComponent();
         DataContext = new FolderViewModel(); // 确保FolderViewModel被实例化
+        this.AttachedToVisualTree += FolderView_AttachedToVisualTree;
+    }
+    
+    private void FolderView_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+    {
+        // 发送消息到ViewModel
+        var messageBus = Locator.Current.GetService<IMessageBus>();
+        if (DataContext is FolderViewModel model)
+        {
+            MessageBus.Current.SendMessage(model.SelectedNode);
+        }
+        
     }
 
     /// <summary>
@@ -46,8 +58,6 @@ public partial class FolderView : UserControl
 
         // todo:根据节点类型，切换右侧视图内容
         MessageBus.Current.SendMessage(selectedFolder);
-        // test:当 selectedCategory 不为 null 且 Type 属性等于 1 时执行
-        // selectedCategory.Name = $"{selectedCategory.Name}_{selectedCategory.Type}";
     }
 
     /// <summary>

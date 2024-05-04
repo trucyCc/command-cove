@@ -8,7 +8,7 @@ namespace command_cove.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public Folder _selectedNode;
+    private Folder _selectedNode;
 
     public Folder SelectedNode
     {
