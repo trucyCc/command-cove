@@ -25,11 +25,22 @@ public class FolderViewModel : ViewModelBase
 
     public FolderViewModel()
     {
+        // 初始化数据源
+        using var db = new DatabaseManager();
+        if (db.Folders.ToList().Count == 0)
+        {
+            Folder.InitData(db);
+        }
+        
+        
+        // Folders = BuildTree(GetRawDataFromDatabaseOrOtherSource());
+        Folders = BuildTree(db.Folders.ToList());
+        
         // 初始化选中节点，默认为空
         _selectedNode = new Folder();
-
-        Folders = BuildTree(GetRawDataFromDatabaseOrOtherSource());
     }
+    
+    
 
     /// <summary>
     /// 文件夹树

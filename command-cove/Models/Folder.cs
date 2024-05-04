@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace command_cove.Models;
 
@@ -13,6 +17,7 @@ namespace command_cove.Models;
  * @Author: Trucy
  * @Modify:
  */
+[PrimaryKey("Id")]
 public class Folder(
     string name = "",
     int id = default,
@@ -22,6 +27,11 @@ public class Folder(
     List<Folder>? children = null)
     : INotifyPropertyChanged
 {
+    public Folder(string name, int id, int parentId, int type, DateTime creationTime)
+        : this(name, id, parentId, type, creationTime, null)
+    {
+    }
+
     /// <summary>
     /// 名称
     /// </summary>
@@ -38,10 +48,11 @@ public class Folder(
             }
         }
     }
-
+    
     /// <summary>
     /// 唯一键
     /// </summary>
+    [Key]
     public int Id { get; init; } = id;
 
     /// <summary>
@@ -78,5 +89,27 @@ public class Folder(
     private void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public static void InitData(DatabaseManager db)
+    {
+        var existingFolder = db.Folders.FirstOrDefault(f => f.Name == "Default Folder");
+        if (existingFolder != null)
+        {
+            return;
+        }
+
+        // 如果不存在，则添加默认文件夹
+        var defaultFolder = new Folder
+        {
+            Name = "Default Folder",
+            ParentId = 0, // 假设是顶级文件夹
+            Type = 0, // 文件夹类型
+            CreationTime = DateTime.Now
+        };
+
+        // 插入到数据库
+        db.Folders.Add(defaultFolder);
+        db.SaveChanges();
     }
 }
