@@ -194,7 +194,12 @@ public class FolderViewModel : ViewModelBase
             _db.SaveChanges();
         }
 
-        var folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
+        var list = _db.Folders.ToList();
+        foreach (var item in list)
+        {
+            item.Children = new List<Folder>();
+        }
+        var folders = new ObservableCollection<Folder>(BuildTree(list));
         Folders.Clear();
         foreach (var folderItem in folders)
         {
