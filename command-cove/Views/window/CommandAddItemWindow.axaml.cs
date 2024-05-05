@@ -84,12 +84,19 @@ public partial class CommandAddItemWindow : Window
     {
         if (e.Key == Key.Enter)
         {
+            int sort = 255;
+            if (_sortNumericUpDown.Value != null)
+            {
+                sort = (int) _sortNumericUpDown.Value;
+            }
+
+            // 创建 Command 对象
             var command = new Command()
             {
-                CommandStr = _commandStr.Text,
-                Comment = _commentTextBox.Text,
+                CommandStr = _commandStr.Text ?? "DefaultCommandStr",
+                Comment = _commentTextBox.Text ?? "DefaultComment",
                 CreationTime = DateTime.Now,
-                Sort = (int) _sortNumericUpDown.Value
+                Sort = sort
             };
             // 触发事件并传递输入框中的数据
             InputDataEntered?.Invoke(this, command);

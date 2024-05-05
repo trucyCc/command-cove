@@ -93,6 +93,11 @@ public class FolderViewModel : ViewModelBase
     /// </summary>
     public void AddLevelNode(string name)
     {
+        if (string.IsNullOrEmpty(name))
+        {
+            return;
+        }
+        
         var folder = new Folder
         {
             Name = name,
