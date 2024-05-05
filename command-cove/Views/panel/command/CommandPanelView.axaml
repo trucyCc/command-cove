@@ -56,7 +56,7 @@
                                     <StackPanel Grid.Column="1">
                                         <!-- <Button Content="查看" Margin="0 5" /> -->
                                         <Button Content="复制" Margin="0 5" />
-                                        <Button Content="删除" Margin="0 5">
+                                        <Button Click="RemoveItem" CommandParameter="{Binding}" Content="删除" Margin="0 5">
                                             <Button.Styles>
                                                 <Style Selector="Button">
                                                     <Setter Property="Foreground" Value="DarkRed" />

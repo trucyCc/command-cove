@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using command_cove.Models;
+using DynamicData;
 using ReactiveUI;
 
 namespace command_cove.ViewModels;
@@ -36,15 +37,15 @@ public class FolderViewModel : ViewModelBase
         {
             Folder.InitData(_db);
         }
-        
+
         // 从数据库加载数据初始化列表
         Folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
-        
+
         // 初始化选中节点，默认为空
         SelectedNode = Folders.FirstOrDefault()!;
         MessageBus.Current.SendMessage(SelectedNode);
     }
-    
+
     /// <summary>
     /// 文件夹树
     /// </summary>
@@ -174,4 +175,26 @@ public class FolderViewModel : ViewModelBase
             Folders.Add(folderItem);
         }
     }
+
+    /// <summary>
+    /// 删除指定文件夹
+    /// </summary>
+    /// <param name="folder"></param>
+    public void RemoveSelectedItem()
+    {
+        var folderToDelete = _db.Folders.FirstOrDefault(f => f.Id == SelectedNode.Id);
+        if (folderToDelete != null)
+        {
+            _db.Folders.Remove(folderToDelete);
+            _db.SaveChanges();
+        }
+
+        var folders = new ObservableCollection<Folder>(BuildTree(_db.Folders.ToList()));
+        Folders.Clear();
+        foreach (var folderItem in folders)
+        {
+            Folders.Add(folderItem);
+        }
+    }
+
 }

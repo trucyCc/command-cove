@@ -8,14 +8,14 @@ using command_cove.Views.window;
 namespace command_cove.Views.panel.command;
 
 /*
-* 
-* 命令列表Panel
-*
-* @Description:
-* @Date: 2024年05月04日 星期六 20:50:15
-* @Author: Trucy
-* @Modify:
-*/
+ *
+ * 命令列表Panel
+ *
+ * @Description:
+ * @Date: 2024年05月04日 星期六 20:50:15
+ * @Author: Trucy
+ * @Modify:
+ */
 public partial class CommandPanelView : UserControl
 {
     public CommandPanelView()
@@ -23,7 +23,7 @@ public partial class CommandPanelView : UserControl
         InitializeComponent();
         DataContext = new CommandPanelViewModel();
     }
-    
+
     /// <summary>
     /// 打开 新增子节点窗口
     /// </summary>
@@ -47,5 +47,20 @@ public partial class CommandPanelView : UserControl
         {
             model.AddCommand(inputData);
         }
+    }
+
+    private void RemoveItem(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button {DataContext: Command command})
+        {
+            return;
+        }
+
+        if (DataContext is not CommandPanelViewModel model)
+        {
+            return;
+        }
+
+        model.RemoveCommand(command);
     }
 }

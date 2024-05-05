@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using command_cove.Models;
 using command_cove.ViewModels;
 using command_cove.Views.window;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ReactiveUI;
 using Splat;
 
@@ -25,11 +26,11 @@ public partial class FolderView : UserControl
     {
         InitializeComponent();
         DataContext = new FolderViewModel(); // 确保FolderViewModel被实例化
-        
+
         // 窗口加载完成后，触发事件
         AttachedToVisualTree += FolderView_AttachedToVisualTree!;
     }
-    
+
     /// <summary>
     /// 在窗口或控件被附加到可视树时触发
     /// </summary>
@@ -90,7 +91,7 @@ public partial class FolderView : UserControl
             model.AddLevelNode(inputData);
         }
     }
-    
+
     /// <summary>
     /// 打开 新增子节点窗口
     /// </summary>
@@ -115,7 +116,7 @@ public partial class FolderView : UserControl
             model.AddChildNode(inputData);
         }
     }
-    
+
     /// <summary>
     /// 打开 新增子节点窗口
     /// </summary>
@@ -138,6 +139,19 @@ public partial class FolderView : UserControl
         if (DataContext is FolderViewModel model)
         {
             model.AddCommandSetNode(inputData);
+        }
+    }
+
+    /// <summary>
+    /// 删除指定文件夹
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Remove_Item(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is FolderViewModel model)
+        {
+            model.RemoveSelectedItem();
         }
     }
 }

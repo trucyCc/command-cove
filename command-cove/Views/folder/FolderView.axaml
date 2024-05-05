@@ -59,7 +59,9 @@
                         IsVisible="{Binding SelectedNode.Type, 
                                     Converter={StaticResource FolderMenuTypeConverter}}" />
                     <MenuItem Header="重命名" />
-                    <MenuItem Background="Brown" Header="删除" />
+                    <MenuItem Background="Brown" 
+                              Click="Remove_Item"
+                              Header="删除" />
                 </ContextMenu>
             </TreeView.ContextMenu>
             <TreeView.ItemTemplate>

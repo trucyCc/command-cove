@@ -25,6 +25,16 @@ public class Command : INotifyPropertyChanged
     /// 所属命令集ID
     /// </summary>
     public int CommandSetId { get; set; }
+    
+    /// <summary>
+    /// 删除状态
+    /// </summary>
+    public bool IsDelete { get; set; }
+    
+    /// <summary>
+    /// 删除时间
+    /// </summary>
+    public DateTime DeleteTime { get; set; }
 
     private string? _commandStr;
 

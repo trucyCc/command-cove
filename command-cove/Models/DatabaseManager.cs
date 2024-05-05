@@ -68,7 +68,9 @@ public class DatabaseManager : DbContext
                     commandStr TEXT,
                     comment TEXT,
                     remark TEXT,
+                    isDelete BOOLEAN,
                     creationTime DATETIME,
+                    deleteTime DATETIME,
                     sort INTEGER
                 )";
         createTableCommand.ExecuteNonQuery();
