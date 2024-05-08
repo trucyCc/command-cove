@@ -118,7 +118,7 @@ public partial class FolderView : UserControl
     }
 
     /// <summary>
-    /// 打开 新增子节点窗口
+    /// 打开 新增命令集
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -130,7 +130,7 @@ public partial class FolderView : UserControl
     }
 
     /// <summary>
-    /// 新增子节点窗口
+    /// 新增命令集窗口
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="inputData"></param>

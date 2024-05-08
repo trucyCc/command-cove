@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Text.Json;
 using command_cove.Models;
+using command_cove.Models.compare;
 using DynamicData;
+using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 
 namespace command_cove.ViewModels;
@@ -17,7 +21,7 @@ namespace command_cove.ViewModels;
  * @Author: Trucy
  * @Modify:
  */
-public class FolderViewModel : ViewModelBase
+public class FolderViewModel : ViewModelBase, INotifyPropertyChanged
 {
     /// <summary>
     /// 当前选中的节点
@@ -49,7 +53,28 @@ public class FolderViewModel : ViewModelBase
     /// <summary>
     /// 文件夹树
     /// </summary>
-    public ObservableCollection<Folder> Folders { get; set; }
+    private ObservableCollection<Folder> _folders;
+
+    public ObservableCollection<Folder> Folders
+    {
+        get { return _folders; }
+        set
+        {
+            if (_folders != value)
+            {
+                _folders = value;
+                OnPropertyChanged(nameof(Folders));
+            }
+        }
+    }
+
+    // INotifyPropertyChanged 接口实现
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     /// <summary>
     /// 当前选中的节点
@@ -65,8 +90,15 @@ public class FolderViewModel : ViewModelBase
     /// </summary>
     /// <param name="rawData">文件夹列表</param>
     /// <returns>文件树列表</returns>
-    private ObservableCollection<Folder> BuildTree(List<Folder> rawData)
+    private ObservableCollection<Folder> BuildTree(List<Folder> listData)
     {
+        // 将 folders 列表序列化为 JSON 字符串
+        string foldersJson = JsonSerializer.Serialize(listData);
+
+        // 将 JSON 字符串反序列化为新的对象列表
+        var rawData = JsonSerializer.Deserialize<List<Folder>>(foldersJson);
+
+
         // 创建一个字典，用于快速查找节点
         var nodeDict = rawData.ToDictionary(node => node.Id);
 
@@ -97,7 +129,12 @@ public class FolderViewModel : ViewModelBase
         {
             return;
         }
-        
+
+        if (SelectedNode == null)
+        {
+            return;
+        }
+
         var folder = new Folder
         {
             Name = name,
@@ -110,15 +147,8 @@ public class FolderViewModel : ViewModelBase
         _db.Folders.Add(folder);
         _db.SaveChanges();
 
-        // 更新视图
-        var folders = new List<Folder>(Folders);
-        folders.Add(folder);
-        var observableCollection = BuildTree(folders);
-        Folders.Clear();
-        foreach (var folderItem in observableCollection)
-        {
-            Folders.Add(folderItem);
-        }
+        // 刷新树
+        refreshFolderList();
     }
 
     /// <summary>
@@ -140,15 +170,8 @@ public class FolderViewModel : ViewModelBase
         _db.Folders.Add(folder);
         _db.SaveChanges();
 
-        // 更新视图
-        var folders = new List<Folder>(Folders);
-        folders.Add(folder);
-        var observableCollection = BuildTree(folders);
-        Folders.Clear();
-        foreach (var folderItem in observableCollection)
-        {
-            Folders.Add(folderItem);
-        }
+        // 刷新树
+        refreshFolderList();
     }
 
     /// <summary>
@@ -170,15 +193,8 @@ public class FolderViewModel : ViewModelBase
         _db.Folders.Add(folder);
         _db.SaveChanges();
 
-        // 更新视图
-        var folders = new List<Folder>(Folders);
-        folders.Add(folder);
-        var observableCollection = BuildTree(folders);
-        Folders.Clear();
-        foreach (var folderItem in observableCollection)
-        {
-            Folders.Add(folderItem);
-        }
+        // 刷新树
+        refreshFolderList();
     }
 
     /// <summary>
@@ -194,17 +210,75 @@ public class FolderViewModel : ViewModelBase
             _db.SaveChanges();
         }
 
-        var list = _db.Folders.ToList();
-        foreach (var item in list)
+        // 刷新树
+        refreshFolderList();
+    }
+
+    public void refreshFolderList()
+    {
+        // 更新视图
+        var folders = _db.Folders.ToList();
+        var observableCollection = BuildTree(folders);
+        CompareAndUpdate(observableCollection);
+    }
+
+    /// <summary>
+    /// 更新树状目录
+    /// </summary>
+    /// <param name="newFolders"></param>
+    private void CompareAndUpdate(ObservableCollection<Folder> newFolders)
+    {
+        // 比较根文件夹并执行相应的操作
+        var addedFolders = newFolders.Except(Folders, new FolderIdEqualityComparer()).ToList();
+        var removedFolders = Folders.Except(newFolders, new FolderIdEqualityComparer()).ToList();
+
+        foreach (var folder in addedFolders)
         {
-            item.Children = new List<Folder>();
+            Folders.Add(folder);
         }
-        var folders = new ObservableCollection<Folder>(BuildTree(list));
-        Folders.Clear();
-        foreach (var folderItem in folders)
+
+        foreach (var folder in removedFolders)
         {
-            Folders.Add(folderItem);
+            Folders.Remove(folder);
+        }
+
+        // 比较和更新子文件夹
+        foreach (var folder in Folders)
+        {
+            var correspondingNewFolder = newFolders.FirstOrDefault(f => f.Id == folder.Id);
+            if (correspondingNewFolder != null)
+            {
+                // 调用递归辅助方法
+                CompareAndUpdateChildren(folder.Children, correspondingNewFolder.Children);
+            }
         }
     }
 
+    // 递归辅助方法
+    private void CompareAndUpdateChildren(ObservableCollection<Folder> currentChildren,
+        ObservableCollection<Folder> newChildren)
+    {
+        var addedChildren = newChildren.Except(currentChildren, new FolderIdEqualityComparer()).ToList();
+        var removedChildren = currentChildren.Except(newChildren, new FolderIdEqualityComparer()).ToList();
+
+        foreach (var child in addedChildren)
+        {
+            currentChildren.Add(child);
+        }
+
+        foreach (var child in removedChildren)
+        {
+            currentChildren.Remove(child);
+        }
+
+        // 递归比较和更新子文件夹
+        foreach (var child in currentChildren)
+        {
+            var correspondingNewChild = newChildren.FirstOrDefault(c => c.Id == child.Id);
+            if (correspondingNewChild != null)
+            {
+                CompareAndUpdateChildren(child.Children, correspondingNewChild.Children);
+            }
+        }
+    }
 }

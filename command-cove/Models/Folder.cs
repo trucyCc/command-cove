@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -77,8 +78,20 @@ public class Folder : INotifyPropertyChanged
     /// <summary>
     /// 子级别文件夹
     /// </summary>
+    private ObservableCollection <Folder> _children = new();
     [NotMapped]
-    public List<Folder> Children { get; set; } = new();
+    public ObservableCollection<Folder> Children
+    {
+        get => _children;
+        set
+        {
+            if (_children == value)
+                return;
+            // 属性变化通知
+            _children = value;
+            OnPropertyChanged(nameof(Children));
+        }
+    }
 
     /// <summary>
     /// 属性变化通知
