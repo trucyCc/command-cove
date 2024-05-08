@@ -59,7 +59,7 @@
                         IsVisible="{Binding SelectedNode.Type, 
                                     Converter={StaticResource FolderMenuTypeConverter}}" />
                     <MenuItem Header="重命名" />
-                    <MenuItem Background="Brown" 
+                    <MenuItem Background="Brown"
                               Click="Remove_Item"
                               Header="删除" />
                 </ContextMenu>
@@ -67,7 +67,14 @@
             <TreeView.ItemTemplate>
                 <TreeDataTemplate ItemsSource="{Binding Children}">
                     <!-- 文件夹项 名称 -->
-                    <TextBlock Text="{Binding Name}" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                        <PathIcon Data="{StaticResource edit_settings_regular}" Margin="0 0 4 0"
+                                  IsVisible="{Binding Type, Converter={StaticResource CommendVisibleTypeConverter}}" />
+                        <PathIcon Data="{StaticResource folder_regular}" Margin="0 0 4 0"
+                                  IsVisible="{Binding Type, 
+                                    Converter={StaticResource FolderMenuTypeConverter}}" />
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Bottom" />
+                    </StackPanel>
                 </TreeDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
