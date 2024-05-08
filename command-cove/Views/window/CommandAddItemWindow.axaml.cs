@@ -2,20 +2,21 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using command_cove.Models;
 
 namespace command_cove.Views.window;
 
 /*
-* 
-* 命令Panel 新增命令Item
-*
-* @Description:
-* @Date: 2024年05月04日 星期六 20:52:02
-* @Author: Trucy
-* @Modify:
-*/
+ *
+ * 命令Panel 新增命令Item
+ *
+ * @Description:
+ * @Date: 2024年05月04日 星期六 20:52:02
+ * @Author: Trucy
+ * @Modify:
+ */
 public partial class CommandAddItemWindow : Window
 {
     /// <summary>
@@ -44,7 +45,7 @@ public partial class CommandAddItemWindow : Window
         InitializeComponent();
 
         // 失去焦点关闭窗口
-        this.Deactivated += CommandAddItemWindow_Deactivated;
+        // this.Deactivated += CommandAddItemWindow_Deactivated;
         // 按下回车关闭窗口
         this.Activated += CommandAddItemWindow_Activated;
 
@@ -76,33 +77,15 @@ public partial class CommandAddItemWindow : Window
     }
 
     /// <summary>
-    /// 按下回车，关闭窗口，发送数据提交事件
+    /// 按下alt + 回车，关闭窗口，发送数据提交事件
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void CommandAddItemWindow_KeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter)
+        if (e.Key == Key.Enter && e.KeyModifiers.HasFlag(KeyModifiers.Alt))
         {
-            int sort = 255;
-            if (_sortNumericUpDown.Value != null)
-            {
-                sort = (int) _sortNumericUpDown.Value;
-            }
-
-            // 创建 Command 对象
-            var command = new Command()
-            {
-                CommandStr = _commandStr.Text ?? "DefaultCommandStr",
-                Comment = _commentTextBox.Text ?? "DefaultComment",
-                CreationTime = DateTime.Now,
-                Sort = sort
-            };
-            // 触发事件并传递输入框中的数据
-            InputDataEntered?.Invoke(this, command);
-
-            // 关闭弹窗
-            this.Close();
+            CloseDialog(null, null);
         }
     }
 
@@ -112,5 +95,28 @@ public partial class CommandAddItemWindow : Window
         {
             e.Handled = true; // 阻止非数字字符输入
         }
+    }
+
+    private void CloseDialog(object? sender, RoutedEventArgs e)
+    {
+        int sort = 255;
+        if (_sortNumericUpDown.Value != null)
+        {
+            sort = (int) _sortNumericUpDown.Value;
+        }
+
+        // 创建 Command 对象
+        var command = new Command()
+        {
+            CommandStr = _commandStr.Text ?? "DefaultCommandStr",
+            Comment = _commentTextBox.Text ?? "DefaultComment",
+            CreationTime = DateTime.Now,
+            Sort = sort
+        };
+        // 触发事件并传递输入框中的数据
+        InputDataEntered?.Invoke(this, command);
+
+        // 关闭弹窗
+        this.Close();
     }
 }
